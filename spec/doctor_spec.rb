@@ -14,4 +14,18 @@ describe('Doctor') do
       expect(test_doctor.specialty()).to(eq('pediatrics'))
     end
   end
+
+  describe('.all') do
+    it('returns an empty array of doctors') do
+      expect(Doctor.all()).to(eq([]))
+    end
+  end
+
+  describe('#save') do
+    it('saves a doctor object') do
+      test_doctor = Doctor.new({:name => 'John', :specialty => 'pediatrics'})
+      test_doctor.save()
+      expect(Doctor.all()).to(eq([test_doctor]))
+    end
+  end
 end
