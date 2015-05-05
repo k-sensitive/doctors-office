@@ -1,10 +1,11 @@
 class Patient
-  attr_reader(:name,:birthday)
+  attr_reader(:name,:birthday,:doctor_id)
 
 
   define_method(:initialize) do |attributes|
     @name = attributes[:name]
     @birthday = attributes[:birthday]
+    @doctor_id = attributes[:doctor_id] ||= "NULL"
   end
 
   define_singleton_method(:all) do
@@ -21,7 +22,7 @@ class Patient
   end
 
   define_method(:save) do
-    DB.exec("INSERT INTO patients (name, birthday, doctor_id) VALUES ('#{@name}', '#{birthday}',null)")
+    DB.exec("INSERT INTO patients (name, birthday, doctor_id) VALUES ('#{@name}', '#{@birthday}', #{@doctor_id});")
   end
 
   define_method(:==) do |another_patient|
