@@ -14,4 +14,10 @@ describe('Patient') do
       expect(newpatient.birthday()).to(eq(2015-05-05))
     end
   end
+
+  describe('.all') do
+    it('will return an empty array where a list of patients will be') do
+      expect(Patient.all()).to(eq([]))
+    end
+  end
 end
