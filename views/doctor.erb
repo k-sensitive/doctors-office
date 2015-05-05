@@ -1,3 +1,10 @@
 <h2>Here are the list of doctors:</h2>
 
+<ul>
+<% @doctors.each() do |doctor| %>
+<li><a href='/administration/doctors/<%= doctor.id() %>/patients/new'><%= doctor.name() %></li>
+<% end %>
+</ul>
+
+
 <a href='/administration/doctors/new'>Add New Doctor</a>

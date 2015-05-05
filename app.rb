@@ -12,7 +12,8 @@ get('/') do
 end
 
 get('/administration/doctors') do
-  erb(:doctor)  
+  @doctors = Doctor.all()
+  erb(:doctor)
 end
 
 get('/administration/patients/new') do
@@ -28,5 +29,24 @@ post('/administration/doctors') do
   specialty = params.fetch('specialty')
   @doctor = Doctor.new({:name => name, :specialty => specialty})
   @doctor.save()
+  erb(:success)
+end
+
+get('/administration/doctors/:id/patients/new') do
+  @doctor = Doctor.find(params.fetch('id').to_i())
+  erb(:patient_form)
+end
+
+get('/administration/doctors/:id/patients') do
+  @doctor = Doctor.find(params.fetch('id').to_i())  
+  erb(:patients)
+end
+
+post('/administration/doctors/:id/patients') do
+  name = params.fetch('name')
+  birthday = params.fetch('birthday')
+  doctors_id = params.fetch('doctors_id')
+  @patient = Patient.new({:name => name,:birthday => birthday, :doctors_id => doctors_id})
+  @patient.save()
   erb(:success)
 end
